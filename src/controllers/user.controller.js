@@ -91,14 +91,40 @@ let loginHandler = asyncWrapper(async (req, res, next) => {
  * @param {Object} req - Express request object (should have user from JWT)
  * @param {Object} res - Express response object
  */
-const GetUserProfileHandler = asyncWrapper(async (req, res, next) => {
+let GetUserProfileHandler = asyncWrapper(async (req, res, next) => {
     const user = await User.findById(req.user.userId).select('-password');
     if (!user) return next(new AppError('User Not Found', 404));
     res.status(200).json({ message: 'Your Profile info:', user });
 });
 
+let updateProfileHandler = asyncWrapper(async (req, res, next) => {
+    const userId = req.user.userId;
+    const { username } = req.body;
+    let profilePictureUrl = null;
+
+    if (req.file) {
+        const basePath = `${req.protocol}://${req.get('host')}/uploads/images/`;
+        profilePictureUrl = `${basePath}${req.file.filename}`;
+    }
+
+    const updateFields = {};
+    if (username) updateFields.username = username;
+    if (profilePictureUrl) updateFields.profilePicture = profilePictureUrl;
+
+    const updateduser = await User.findByIdAndUpdate(userId, updateFields, {
+        new: true,
+        runValidators: true,
+        select: '-password'
+    });
+
+    if (!updateduser) return next(new AppError('User Not Found', 404));
+
+    res.status(200).json({ sucess: true, message: 'Profile Updated Sucessfully', data: updateduser });
+});
+
 module.exports = {
     signupHandler,
     loginHandler,
-    GetUserProfileHandler
+    GetUserProfileHandler,
+    updateProfileHandler
 }

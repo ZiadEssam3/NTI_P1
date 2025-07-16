@@ -11,7 +11,7 @@ require("dotenv").config();
 function GenerateAccessToken(userId) {
     const payload = { userId };
     const secretKey = process.env.JWT_ACCESS_TOKEN_SECRET;
-    const options = { expiresIn: '15m' };
+    const options = { expiresIn: '30m' };
     return jwt.sign(payload, secretKey, options);
 }
 

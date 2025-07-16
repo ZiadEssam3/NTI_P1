@@ -1,16 +1,16 @@
 const express = require('express');
-const { signupHandler, loginHandler, GetUserProfileHandler } = require('../controllers/user.controller');
+const {
+    signupHandler,
+    loginHandler,
+    GetUserProfileHandler,
+    updateProfileHandler
+} = require('../controllers/user.controller');
 const { signupValidator } = require('../middlewares/validation/signup.validator.middleware');
 const { loginValidator } = require('../middlewares/validation/login.validator.middleware');
 const validateRequest = require('../middlewares/error/validateRequest');
-const upload = require('../middlewares/multer/img.uploads.middleware');
 const { authenticate } = require('../middlewares/auth/authenticate.middleware');
+const uploadByType = require('../middlewares/multer/file.uploads.middleware');
 const router = express.Router();
-
-
-
-
-
 
 /**
  * @route   POST /user/signup
@@ -21,7 +21,13 @@ const router = express.Router();
  * @returns {400} Validation errors
  * @returns {500} Server error
  */
-router.post('/signup', upload.single('profilePicture'), signupValidator, validateRequest, signupHandler);
+router.post(
+    '/signup'
+    , uploadByType.imageUpload.single('profilePicture'),
+    signupValidator,
+    validateRequest,
+    signupHandler
+);
 
 /**
  * @route   POST /user/login
@@ -42,5 +48,13 @@ router.post('/login', loginValidator, validateRequest, loginHandler);
  * @access  Private (requires authentication)
  */
 router.get("/profile", authenticate, GetUserProfileHandler);
+
+
+
+router.put('/profile', authenticate, uploadByType.imageUpload.single('profilePicture'), updateProfileHandler);
+
+
+
+
 
 module.exports = router;
