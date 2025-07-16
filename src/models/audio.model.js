@@ -6,6 +6,7 @@ const audioSchema = new mongoose.Schema({
         required: [true, 'Title is required'],
         trim: true,
         maxlength: [100, 'Title must be under 100 characters'],
+        unique: true
     },
     genre: {
         type: String,
