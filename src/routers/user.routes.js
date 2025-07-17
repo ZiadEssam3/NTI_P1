@@ -47,11 +47,11 @@ router.post('/login', loginValidator, validateRequest, loginHandler);
  * @desc    Get user profile
  * @access  Private (requires authentication)
  */
-router.get("/profile", authenticate, GetUserProfileHandler);
+router.get("/profile", authenticate, validateRequest, GetUserProfileHandler);
 
 
 
-router.put('/profile', authenticate, uploadByType.imageUpload.single('profilePicture'), updateProfileHandler);
+router.put('/profile', authenticate, uploadByType.imageUpload.single('profilePicture'), validateRequest, updateProfileHandler);
 
 
 

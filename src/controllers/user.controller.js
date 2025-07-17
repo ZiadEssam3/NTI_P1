@@ -68,8 +68,8 @@ let loginHandler = asyncWrapper(async (req, res, next) => {
     if (!user) return next(new AppError('Invalied Email or Password', 401));
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new AppError('Invalied Email or Password', 401));
-    const accessToken = GenerateAccessToken(user._id);
-    const refreshToken = GenerateRefreshToken(user._id);
+    const accessToken = GenerateAccessToken(user._id, user.email, user.role);
+    const refreshToken = GenerateRefreshToken(user._id, user.email, user.role);
     res.cookie('_rftq', refreshToken, {
         httpOnly: true,
         sameSite: 'lax',

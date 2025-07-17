@@ -4,6 +4,7 @@ const errorHandler = require('./middlewares/error/errorHandler');
 require('dotenv').config()
 const userRouter = require('./routers/user.routes');
 const audioRouter = require('./routers/audio.routes')
+const adminRouter = require('./routers/admin.routes')
 const helmet = require("helmet");
 const cookieParser = require('cookie-parser');
 const AppError = require('./helpers/error/appError');
@@ -24,6 +25,7 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use(logRequests);
 app.use(`${api}/users`, userRouter);
 app.use(`${api}/audio`, audioRouter);
+app.use(`${api}/admin`, adminRouter);
 
 // Catch all unmatched routes
 app.all('*', (req, res, next) => {

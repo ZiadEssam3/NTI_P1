@@ -8,12 +8,13 @@ require("dotenv").config();
  * @param {string} email - Email of the user
  * @returns {string} Signed JWT access token valid for 1 hour
  */
-function GenerateAccessToken(userId) {
-    const payload = { userId };
+function GenerateAccessToken(userId, email, role) {
+    const payload = { userId, email, role };
     const secretKey = process.env.JWT_ACCESS_TOKEN_SECRET;
     const options = { expiresIn: '30m' };
     return jwt.sign(payload, secretKey, options);
 }
+
 
 /**
  * @function GenerateRefreshToken
@@ -22,11 +23,11 @@ function GenerateAccessToken(userId) {
  * @param {string} email - Email of the user
  * @returns {string} Signed JWT refresh token valid for 1 year
  */
-function GenerateRefreshToken(userId) {
-    const payload = { userId };
+
+function GenerateRefreshToken(userId, email, role) {
+    const payload = { userId, email, role };
     const secretKey = process.env.JWT_REFRESH_TOKEN_SECRET;
     const options = { expiresIn: '1y' };
-
     return jwt.sign(payload, secretKey, options);
 }
 
