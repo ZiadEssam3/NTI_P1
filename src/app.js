@@ -27,6 +27,14 @@ app.use(`${api}/users`, userRouter);
 app.use(`${api}/audio`, audioRouter);
 app.use(`${api}/admin`, adminRouter);
 
+
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        message: 'Welcome to the API. Use routes under ' + api
+    });
+});
+
 // Catch all unmatched routes
 app.all('*', (req, res, next) => {
     next(new AppError(`${ERRORS.ROUTE_NOT_FOUND}: ${req.originalUrl}`, 404));
