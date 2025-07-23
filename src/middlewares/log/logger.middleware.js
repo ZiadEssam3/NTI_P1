@@ -1,10 +1,10 @@
-const logger = require('../../helpers/log/logger.helper');
+// const logger = require('../../helpers/log/logger.helper');
 
-const logRequests = (req, res, next) => {
-    logger.info(`${req.method} ${req.url}`);
-    next();
-};
+// const logRequests = (req, res, next) => {
+//     logger.info(`${req.method} ${req.url}`);
+//     next();
+// };
 
-module.exports = {
-    logRequests
-}
+// module.exports = {
+//     logRequests
+// }

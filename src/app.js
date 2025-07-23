@@ -1,5 +1,5 @@
 const express = require('express');
-const { logRequests } = require('./middlewares/log/logger.middleware');
+// const { logRequests } = require('./middlewares/log/logger.middleware');
 const errorHandler = require('./middlewares/error/errorHandler');
 require('dotenv').config()
 const userRouter = require('./routers/user.routes');
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-app.use(logRequests);
+// app.use(logRequests);
 app.use(`${api}/users`, userRouter);
 app.use(`${api}/audio`, audioRouter);
 app.use(`${api}/admin`, adminRouter);
