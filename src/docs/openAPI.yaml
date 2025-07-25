@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: NTI
+  version: 1.0.0
+paths:
+  /api/v1/users/signup:
+    post:
+      summary: sign-up-user
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+  /api/v1/users/login:
+    post:
+      summary: login-user
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/users/profile:
+    get:
+      summary: get-user-profile-data
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+    put:
+      summary: update-user-profile
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+  /api/v1/audio:
+    post:
+      summary: add-new-audio
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+    get:
+      summary: get-all-audios
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/audio/mine:
+    get:
+      summary: get-my-own-audios
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/audio/stream/68781525243a7ba0023036e0:
+    get:
+      summary: stream-an-audio-by-id
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/audio/68781525243a7ba0023036e0:
+    put:
+      summary: update-audio-by-id
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+    delete:
+      summary: delete-audio-by-id
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/admin/audios:
+    get:
+      summary: get-all-audios
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/admin/audios/68781896a6c834b1c7d4b60a:
+    delete:
+      summary: delete-audio-by-admin
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
